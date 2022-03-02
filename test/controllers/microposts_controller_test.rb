@@ -1,22 +1,24 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class MicropostsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @micropost = microposts(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get microposts_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_micropost_url
     assert_response :success
   end
 
-  test "should create micropost" do
-    assert_difference("Micropost.count") do
+  test 'should create micropost' do
+    assert_difference('Micropost.count') do
       post microposts_url, params: { micropost: { content: @micropost.content, user_id: @micropost.user_id } }
     end
 

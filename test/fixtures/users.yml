@@ -3,6 +3,7 @@
 one:
   name: string1
   email: string1@example.com
+  password_digest: <%= User.digest('password') %>
 
 #two:
 #  name: string2

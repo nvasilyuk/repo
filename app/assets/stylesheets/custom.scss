@@ -83,6 +83,25 @@ footer {
      }
    }
 }
+@media (max-width: 800px) {
+footer {
+  small {
+    display: block;
+    float: none;
+    margin-bottom: 1em;
+  }
+  ul {
+     float: none;
+     padding: 0;
+     li {
+       float: none;
+       margin-left: 0;
+     }
+   }
+ }
+}
+
+
 
 /* mixins, variables, etc. */
 $gray-medium-light: #eaeaea;
@@ -161,3 +180,27 @@ input {
   }
 }
 
+/* Dark mode
+@mixin dark {
+  body {
+    background-color: #000 !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  @include dark;
+} */
+
+/* force the dark mode when OS interface is light
+@media (prefers-color-scheme: light) {
+  [data-color-mode="dark"] {
+    @include dark;
+  }
+} */
+
+/* follow the OS interface colors or force the dark theme
+@media (prefers-color-scheme: dark) {
+  [data-color-mode="auto"], [data-color-mode="dark"] {
+    @include dark;
+  }
+} */

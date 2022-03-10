@@ -1,12 +1,11 @@
-<div id="<%= dom_id user %>">
-  <p>
-    <strong>Name:</strong>
-    <%= user.name %>
-  </p>
+<li>
 
-  <p>
-    <strong>Email:</strong>
-    <%= user.email %>
-  </p>
+  <%= gravatar_for user, size: 50 %>
+  <%= link_to user.name, user %>
 
-</div>
+  <% if current_user.admin? && !current_user?(user) %>
+    <%= button_to 'delete', user, method: :delete,
+                  data: { confirm: 'You sure?' } %>
+  <% end %>
+
+</li>

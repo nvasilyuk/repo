@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   # resources :sessions
   resources :microposts
   resources :users
+  resources :account_activations, only: [:edit]
 end

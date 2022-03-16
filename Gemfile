@@ -29,9 +29,10 @@ gem 'jbuilder'
 gem 'bcrypt', '~> 3.1.7'
 gem 'rails-controller-testing'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 
 gem 'bootsnap', require: false
-gem 'faker'
+
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 

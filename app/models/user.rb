@@ -6,9 +6,8 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   before_save :downcase_email
   before_save :create_activation_digest
-  # before_save { email.downcase! }
 
-  has_many :microposts
+  has_many :microposts, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, length: { maximum: 100 },
@@ -57,6 +56,10 @@ class User < ApplicationRecord
 
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  def feed
+    Micropost.where('user_id = ?', id)
   end
 
   def remember

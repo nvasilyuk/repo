@@ -26,15 +26,17 @@ gem 'jbuilder'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
+gem 'aws-sdk-s3', '1.46.0', require: false
 gem 'bcrypt', '~> 3.1.7'
+gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
 gem 'rails-controller-testing'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 
 gem 'bootsnap', require: false
 
-gem 'will_paginate'
+gem 'active_storage_validations', '0.8.2'
 gem 'bootstrap-will_paginate'
+gem 'will_paginate'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

@@ -3,6 +3,7 @@
 class MicropostsController < ApplicationController
   before_action :set_micropost, only: %i[show edit update destroy]
   before_action :logged_in_user, only: %i[create destroy]
+  before_action :correct_user, only: :destroy
 
   # GET /microposts or /microposts.json
   def index
@@ -24,12 +25,17 @@ class MicropostsController < ApplicationController
   def create
     # @micropost = Micropost.new(micropost_params)
     @micropost = current_user.microposts.build(micropost_params)
+    @micropost.image.attach(params[:micropost][:image])
     if @micropost.save
       flash[:success] = 'Micropost created!'
-      redirect_to root_url
+      # redirect_to root_url
     else
-      render 'static_pages/home'
+      @feed_items = current_user.feed.paginate(page: params[:page])
+      flash[:danger] = "Micropost wasn't created! Probably it was empty or image has invalid format/size"
+      # redirect_to root_url
+      # render 'static_pages/home'
     end
+    redirect_to root_url
   end
 
   # PATCH/PUT /microposts/1 or /microposts/1.json
@@ -48,11 +54,13 @@ class MicropostsController < ApplicationController
   # DELETE /microposts/1 or /microposts/1.json
   def destroy
     @micropost.destroy
+    flash[:success] = 'Micropost deleted'
+    redirect_to request.referrer || root_url
 
-    respond_to do |format|
-      format.html { redirect_to microposts_url, notice: 'Micropost was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    # respond_to do |format|
+    #   format.html { redirect_to root_url, notice: 'Micropost was successfully destroyed.' }
+    #   format.json { head :no_content }
+    # end
   end
 
   private
@@ -63,6 +71,11 @@ class MicropostsController < ApplicationController
   end
 
   def micropost_params
-    params.require(:micropost).permit(:content)
+    params.require(:micropost).permit(:content, :image)
+  end
+
+  def correct_user
+    @micropost = current_user.microposts.find_by(id: params[:id])
+    redirect_to root_url if @micropost.nil?
   end
 end

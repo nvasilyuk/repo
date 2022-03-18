@@ -13,27 +13,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  # test 'should create user' do
-  #   assert_difference('User.count') do
-  #     post users_url params: { user: { email: 'example@mail.ru', name: 'Example',
-  #                                      password: 'foobar',
-  #                                      password_confirmation: 'foobar' } }
-  #   end
-  #   assert_redirected_to user_url(User.last)
-  # end
-
-  # test 'should show user' do
-  #   get user_url(@user)
-  #   assert_response :success
-  # end
-  #
-  # test 'should destroy user' do
-  #   assert_difference('User.count', -1) do
-  #     delete user_url(@user)
-  #   end
-  #   assert_redirected_to users_url
-  # end
-
   test 'should redirect index when not logged in' do
     get users_path
     assert_redirected_to login_url
@@ -82,4 +61,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
   end
 
+  test 'should redirect following when not logged in' do
+    get following_user_path(@user)
+    assert_redirected_to login_url
+  end
+
+  test 'should redirect followers when not logged in' do
+    get followers_user_path(@user)
+    assert_redirected_to login_url
+  end
 end

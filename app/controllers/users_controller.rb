@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :correct_user, only: %i[edit update]
   before_action :admin_user, only: :destroy
 
+
   def index
     @users = User.paginate(page: params[:page], per_page: 7)
   end
@@ -26,22 +27,9 @@ class UsersController < ApplicationController
       @user.send_activation_email
       flash[:info] = 'Please check your email to activate your account!'
       redirect_to root_url
-      # log_in @user
-      # flash[:success] = 'Welcome to the Sample App!'
-      # redirect_to @user
     else
       render 'new'
     end
-    # respond_to do |format|
-    #   if @user.save
-    #     log_in @user
-    #     format.html { redirect_to user_url(@user), notice: 'User was successfully created.' }
-    #     format.json { render :show, status: :created, location: @user }
-    #   else
-    #     format.html { render :new, status: :unprocessable_entity }
-    #     format.json { render json: @user.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   def update
@@ -83,15 +71,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password,
                                  :password_confirmation)
   end
-
-  # def logged_in_user
-  #   unless logged_in?
-  #     store_location
-  #     flash[:danger] = 'Please log in.'
-  #     redirect_to login_url
-  #   end
-  # end
-
+  
   def correct_user
     @user = User.find(params[:id])
     redirect_to(root_url) unless current_user?(@user)

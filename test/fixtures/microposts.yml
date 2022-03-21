@@ -20,13 +20,12 @@ most_recent:
   created_at: <%= Time.zone.now %>
   user: archer
 
-<% 30.times do |n| %>
+<% 40.times do |n| %>
 micropost_<%= n %>:
   content: "Nihil accusamus fuga consequuntur ipsam."
-  # content: <%= Faker::Lorem.sentence(word_count: 5) %>
   created_at: <%= 42.days.ago %>
-  user: archer
-  <% end %>
+  user: one
+<% end %>
 
 ants:
   content: "Oh, is that what you want? Because that's how you get ants!"

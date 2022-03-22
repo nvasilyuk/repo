@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
         else
           forget(user)
         end
+        redirect_to root_url
       else
         message = 'Account not activated.'
         message += 'Check your email for the activation link.'
